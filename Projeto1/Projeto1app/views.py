@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, ListView
 
 from Projeto1app.models import tarefa
 
@@ -9,6 +11,11 @@ from Projeto1app.models import tarefa
 def home(request):
     return render(request, "Projeto1app/home.html")
 
-def tarefa_listar(request):
-    tarefas = tarefa.objects.all()
-    return render(request, "Projeto1app/tarefa_listas.html", {"tarefas" : tarefas})
+class TarefaLisView(ListView):
+    model = tarefa
+
+class TarefaCreateView (CreateView):
+    model = tarefa
+    fields = ["titulo", "prazoLimite",
+              "terminado_em", "pessoa_responsavel"]
+    success_url = reverse_lazy("tarefa_list")

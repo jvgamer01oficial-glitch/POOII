@@ -18,9 +18,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Projeto1app.views import home, tarefa_listar
+from Projeto1app.views import TarefaCreateView, TarefaLisView, home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', tarefa_listar)
+    path('', TarefaLisView.as_view(), name= "tarefa_list"),
+    path("creat", TarefaCreateView.as_view())
 ]
