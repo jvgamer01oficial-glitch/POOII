@@ -18,10 +18,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from Projeto1app.views import TarefaCreateView, TarefaLisView, home
+from Projeto1app.views import TarefaCreateView, TarefaDeleteView, TarefaLisView, TarefaUpdateView, home
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TarefaLisView.as_view(), name= "tarefa_list"),
-    path("creat", TarefaCreateView.as_view())
+    path("creat", TarefaCreateView.as_view()),
+    path("update/<int:pk>", TarefaUpdateView.as_view(), name= "tarefa_update"),
+    path("delete/<int:pk>", TarefaDeleteView.as_view(), name= "tarefa_delete")
 ]
